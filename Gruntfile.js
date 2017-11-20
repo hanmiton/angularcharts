@@ -5,13 +5,13 @@ module.exports = function (grunt) {
       server: {
         options: {
           port: 9001,
-          base: 'public/'
+          base: ''
         }
       }
     },
     watch: {
       project: {
-        files: ['public/**/*.js', 'public/**/*.html', 'public/**/*.json', 'public/**/*.css'],
+        files: ['*.js', '*.html', '*.json', '*.css'],
         options: {
           livereload: true
         }

@@ -4,11 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Proyecto Integrador</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
-     <script src="js/app.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.8.8/angular-chart.min.js"></script>
+    <style src="main.css"></style>
+     <script src="app.js"></script>
+     <style src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></style>
+     <style src="https://raw.githubusercontent.com/jtblin/angular-chart.js/master/dist/angular-chart.min.css"></style>
   </head>
-  <body>
-    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" 
-  chart-series="series" chart-click="onClick"></canvas> 
-  </body>
+  <body ng-app="App">
+  <div ng-controller="chartsCtrl as vt">
+    <div class="row">
+      <div class="col-sm-12">
+        <canvas chart-options="vt.chartLineOptions" id="line" class="chart chart-line" chart-data="vt.chartLineCharts" chart-labels="vt.chartLineLabels" chart-legend="true" chart-series="vt.chartLineSeries" chart-colours="vt.chartLineColours">
+        </canvas>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <canvas id="radar" class="chart chart-radar" chart-options="vt.chartRadarOptions" chart-colours="vt.chartRadarColours" chart-data="vt.chartRadarCharts" chart-labels="vt.chartRadarLabels">
+        </canvas>
+      </div>
+      <div class="col-sm-6">
+        <canvas id="pie" class="chart chart-pie" chart-options="vt.chartPieOptions" chart-data="vt.chartPieCharts" chart-colours="vt.chartPieColours" chart-labels="vt.chartPieLabels"></canvas>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

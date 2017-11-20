@@ -1,33 +1,51 @@
-angular.module("app", ["chart.js"])
-  // Optional configuration
-  .config(['ChartJsProvider', function (ChartJsProvider) {
-    // Configure all charts
-    ChartJsProvider.setOptions({
-      chartColors: ['#FF5252', '#FF8A80'],
-      responsive: false
-    });
-    // Configure all line charts
-    ChartJsProvider.setOptions('line', {
-      showLines: false
-    });
-  }])
-  .controller("LineCtrl", ['$scope', '$timeout', function ($scope, $timeout) {
+var app = angular.module('App', ["chart.js"]);
+app.controller('chartsCtrl', function($http) {
+  var vt = this;
 
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A', 'Series B'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+  // Line Chart
   
-  // Simulate async data update
-  $timeout(function () {
-    $scope.data = [
-      [28, 48, 40, 19, 86, 27, 90],
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
-  }, 3000);
-}]);
+  vt.chartLineLabels = ["January", "February", "March", "April", "May", "June", "July"];
+
+  vt.chartLineSeries = ['New Users', 'Global Quizz Results in %'];
+
+  vt.chartLineCharts = [];
+  
+  // API Request
+  $http.get('http://www.json-generator.com/api/json/get/clayCfTkzm?indent=2').
+  success(function(data) {
+    angular.forEach(data, function(chartLineData) {
+      vt.chartLineCharts.push(chartLineData.chart)
+    });
+  });
+
+  vt.chartLineOptions = {
+    maintainAspectRatio: false,
+    responsive: true
+  };
+
+  vt.chartLineColours = ['#494750', '#cc3321'];
+
+  vt.chartRadarLabels = ["Adobe PDF", "Video", "Text File", "Box.com", "Presentation"];
+  
+  // Radar Chart
+  vt.chartRadarCharts = [
+    [65, 59, 90, 81, 56]
+  ];
+
+  vt.chartRadarOptions = {
+    maintainAspectRatio: true,
+    responsive: true
+  }
+  
+  vt.chartRadarColours = ['#cc3321'];
+  
+  // Pie Chart
+  vt.chartPieLabels = ["Powerful-Strength Concentrate", "Hydro-Plumping Re-Texturizing Serum", "Iris Extract Activating Treatment Essence", "Daily Reviving Concentrate"];
+      vt.chartPieCharts = [152, 51, 68, 210];
+      vt.chartPieOptions = {
+      maintainAspectRatio: true,
+      responsive: true
+    }
+    vt.chartPieColours =['#494750', '#999999', '#cc3321', '#2fb467'];
+  
+});
